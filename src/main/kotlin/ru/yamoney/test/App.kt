@@ -7,6 +7,7 @@ java -jar app.jar [COMMAND] [ARGUMENTS]
             Commands:
             payment %USER% %SUM% %SHOP_ID%
             deposit %USER% %SUM%
+            transfer %FROM_USER% %DEST_USER% %SUM%
             balance %USER%
             shop_info %SHOP_ID%
 """
@@ -19,6 +20,10 @@ fun main(args: Array<String>) {
             "PAYMENT" -> billing.addOperation(Payment(args[1], BigDecimal(args[2]), args[3]))
             "DEPOSIT" -> billing.addOperation(Deposit(args[1], BigDecimal(args[2])))
             "BALANCE" -> billing.getUserBalance(args[1])
+            "TRANSFER" -> {
+                billing.addOperation(Payment(args[1], BigDecimal(args[3]), null))
+                billing.addOperation(Deposit(args[2], BigDecimal(args[3])))
+            }
             "SHOP_INFO" -> billing.getShopIdOperations(args[1])
             else -> throw IllegalArgumentException("Unknown command")
         }

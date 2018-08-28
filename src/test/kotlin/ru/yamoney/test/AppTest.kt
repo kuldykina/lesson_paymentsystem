@@ -23,4 +23,9 @@ class AppTest {
     fun shopInfo() {
         main(arrayOf("shop_info", "4454"))
     }
+
+    @Test
+    fun transfer() {
+        main(arrayOf("transfer", "Вася", "Дима", "50"))
+    }
 }

@@ -18,15 +18,15 @@ class BillingImpl : Billing {
     }
 
     override fun getUserBalance(user: String): BigDecimal {
-        var balance = BigDecimal.ZERO
+        var userBalance = BigDecimal.ZERO
         file.readLines()
                 .map { it.toOperation() }
                 .filter { it.user == user }
                 .forEach {
-                    balance = it.calculate(balance)
+                    userBalance = it.calculate(userBalance)
                 }
-        println("$user balance: ${balance.toPlainString()}")
-        return balance
+        println("$user balance: ${userBalance.toPlainString()}")
+        return userBalance
     }
 
     override fun addOperation(operation: Operation) {
@@ -41,4 +41,3 @@ class BillingImpl : Billing {
         return gson.fromJson(json, Class.forName(operation)) as Operation
     }
 }
-

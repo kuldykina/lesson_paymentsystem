@@ -17,7 +17,7 @@ data class Deposit(
 data class Payment(
         override val user: String,
         val sum: BigDecimal,
-        val shopId: String
+        val shopId: String?
 ) : Operation {
     override fun calculate(oldBalance: BigDecimal): BigDecimal = oldBalance.subtract(sum)
 }
